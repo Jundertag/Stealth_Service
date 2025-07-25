@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding?.buttonKillService?.setOnClickListener {
+            foregroundService.stopService()
             stopService(serviceIntent)
             Log.d(TAG, "Kill Service Command Sent")
         }

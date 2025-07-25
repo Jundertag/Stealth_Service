@@ -13,7 +13,6 @@ import com.jayden.stealthService.R
 
 class ForegroundService : Service() {
 
-    private var pingService = false
     private var handler = Handler(Looper.getMainLooper())
 
     companion object {
@@ -27,11 +26,9 @@ class ForegroundService : Service() {
 
     private val ping = object : Runnable {
         override fun run() {
-            if (pingService) {
-                Log.i(TAG, "Ping Successful")
+            Log.i(TAG, "Ping Successful")
+            handler.postDelayed(this, 1000)
 
-                handler.postDelayed(this, 1000)
-            }
         }
     }
 
@@ -65,20 +62,24 @@ class ForegroundService : Service() {
     }
 
     fun pingService() {
-        pingService = true
         Log.d(TAG, "Ping Service Command Received")
         handler.post(ping)
     }
 
     fun stopPingService() {
         Log.d(TAG, "Stop Ping Service Command Received")
-        pingService = false
+        handler.removeCallbacks(ping)
+    }
+
+    fun stopService() {
+        Log.d(TAG, "Kill Service Command Received")
+        stopSelf()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy")
-        pingService = false
+        handler.removeCallbacks(ping)
         stopForeground(STOP_FOREGROUND_REMOVE)
     }
 }
