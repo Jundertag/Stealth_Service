@@ -6,13 +6,15 @@ import android.os.IBinder
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.jayden.stealthService.R
-import java.lang.Thread.sleep
 
 class ForegroundService : Service() {
 
-    var pingService = false
+    private var pingService = false
+    private var handler = Handler(Looper.getMainLooper())
 
     companion object {
         private const val NOTIFICATION_ID = 1
@@ -23,8 +25,27 @@ class ForegroundService : Service() {
         private const val TAG = "ForegroundService"
     }
 
+    private val ping = object : Runnable {
+        override fun run() {
+            if (pingService) {
+                Log.i(TAG, "Ping Successful")
+
+                handler.postDelayed(this, 1000)
+            }
+        }
+    }
+
     override fun onBind(intent: Intent): IBinder? {
         return null
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        Log.d(TAG, "onCreate")
+        val channel =
+            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+        val manager = getSystemService(NotificationManager::class.java)
+        manager.createNotificationChannel(channel)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -36,11 +57,6 @@ class ForegroundService : Service() {
     private fun createNotification(): Notification {
         Log.d(TAG, "createNotification")
 
-        val channel =
-            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
-        val manager = getSystemService(NotificationManager::class.java)
-        manager.createNotificationChannel(channel)
-
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("Foreground Service")
             .setContentText("Running in the background")
@@ -50,16 +66,12 @@ class ForegroundService : Service() {
 
     fun pingService() {
         pingService = true
-        Log.d(TAG, "Ping Service Command Sent")
-
-        while (pingService) {
-            sleep(1000)
-            Log.i(TAG, "Ping Successful")
-        }
+        Log.d(TAG, "Ping Service Command Received")
+        handler.post(ping)
     }
 
     fun stopPingService() {
-        Log.d(TAG, "Stop Ping Service Command Sent")
+        Log.d(TAG, "Stop Ping Service Command Received")
         pingService = false
     }
 
@@ -67,5 +79,6 @@ class ForegroundService : Service() {
         super.onDestroy()
         Log.d(TAG, "onDestroy")
         pingService = false
+        stopForeground(STOP_FOREGROUND_REMOVE)
     }
 }
