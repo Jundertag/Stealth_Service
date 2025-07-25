@@ -8,7 +8,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.jayden.stealthservice"
+        applicationId = "com.jayden.stealthService"
         minSdk = 30
         targetSdk = 36
         versionCode = 1

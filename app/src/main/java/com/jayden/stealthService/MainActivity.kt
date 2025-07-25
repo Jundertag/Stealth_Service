@@ -38,4 +38,9 @@ class MainActivity : AppCompatActivity() {
             stopService(serviceIntent)
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }
