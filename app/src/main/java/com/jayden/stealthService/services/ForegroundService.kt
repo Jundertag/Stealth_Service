@@ -28,20 +28,20 @@ class ForegroundService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d(TAG, "onStartCommand")
         startForeground(NOTIFICATION_ID, createNotification())
         return START_STICKY
     }
 
     private fun createNotification(): Notification {
-        val channelId = CHANNEL_ID
-        val channelName = CHANNEL_NAME
+        Log.d(TAG, "createNotification")
 
         val channel =
-            NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(channel)
 
-        return Notification.Builder(this, channelId)
+        return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("Foreground Service")
             .setContentText("Running in the background")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -53,17 +53,19 @@ class ForegroundService : Service() {
         Log.d(TAG, "Ping Service Command Sent")
 
         while (pingService) {
-            sleep(5000)
+            sleep(1000)
             Log.i(TAG, "Ping Successful")
         }
     }
 
     fun stopPingService() {
+        Log.d(TAG, "Stop Ping Service Command Sent")
         pingService = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d(TAG, "onDestroy")
         pingService = false
     }
 }
