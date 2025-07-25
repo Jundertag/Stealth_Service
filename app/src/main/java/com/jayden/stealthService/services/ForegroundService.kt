@@ -40,7 +40,7 @@ class ForegroundService : Service() {
         super.onCreate()
         Log.d(TAG, "onCreate")
         val channel =
-            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(channel)
     }
