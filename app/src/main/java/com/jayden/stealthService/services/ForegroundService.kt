@@ -28,7 +28,6 @@ class ForegroundService : Service() {
         override fun run() {
             Log.i(TAG, "Ping Successful")
             handler.postDelayed(this, 1000)
-
         }
     }
 
