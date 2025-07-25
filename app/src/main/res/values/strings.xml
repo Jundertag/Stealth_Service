@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Stealth Service</string>
+    <string name="button_start_service_text">Start Stealth Service</string>
+    <string name="button_ping_service_text">Ping Stealth Service</string>
+    <string name="button_stop_ping_service_text">Stop Pinging Stealth Service</string>
+    <string name="button_kill_service_text">Kill Stealth Service</string>
 </resources>
