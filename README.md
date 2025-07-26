@@ -4,15 +4,15 @@
 This is an android application that has a very basic interface. It has buttons to start a foreground service, ping it, and respective controls to stop pinging and kill the service.
 
 ## Disclaimer
-**Do not use this template to develop any malware or otherwise malicious software that collects user's information without their consent**
-This project is for the sole purpose of my own and/or other's education. It is provided AS IS, meaning all features are available for free with minimal effort
-I am not responsible for any program, executable, or otherwise, that uses this template for malicious intent
-Any and all that do so will face legal punishment under applicable law
+**Do not use this template to develop any malware or otherwise malicious software that collects user's information without their consent**.
+This project is for the sole purpose of my own and/or other's education. It is provided AS IS, meaning all features are available for free with minimal effort.
+I am not responsible for any program, executable, or otherwise, that uses this template for malicious intent.
+Any and all that do so will face legal punishment under applicable law.
 
 ## How to use
-Before you use, it is recommended to download android studio and clone the master repository to then launch on a mobile device, this way you can see all logcat output with minimal OS interference
+Before you use, it is recommended to download android studio and clone the master repository to then launch on a mobile device, this way you can see all logcat output with minimal OS interference.
 
-Press on "start stealth service" to create and initialize the service, by this time a notification channel will be created and the service will have called `startForeground()` with the `createNotification()` function passed in as the notification object
+Press on "start stealth service" to create and initialize the service, by this time a notification channel will be created and the service will have called `startForeground()` with the `createNotification()` function passed in as the notification object.
 
 by this point, no matter what you do (besides pressing "kill stealth service" or closing the app in the active apps menu, or going to settings and tapping "force stop" on the application), it will not stop running.
 
@@ -24,4 +24,4 @@ in this instance, press "kill stealth service", once this is done, it is no long
 
 ## Extra Notes
 
-For technical details, refer to the latest release in the tags section by clicking on "tags" on the right hand side of github
+For technical details, refer to the latest release in the tags section by clicking on "tags" on the right hand side of github.
