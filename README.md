@@ -10,7 +10,7 @@ I am not responsible for any program, executable, or otherwise, that uses this t
 Any and all that do so will face legal punishment under applicable law.
 
 ## How to use
-Before you use, it is recommended to download android studio and clone the master repository to then launch on a mobile device, this way you can see all logcat output with minimal OS interference.
+Before you use, it is recommended to download android studio and clone the master repository to then deploy on a mobile device, this way you can see all logcat output with minimal OS interference.
 
 Press on "start stealth service" to create and initialize the service, by this time a notification channel will be created and the service will have called `startForeground()` with the `createNotification()` function passed in as the notification object.
 
